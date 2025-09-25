@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Votação PEC da Blindagem</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Incluindo a biblioteca Chart.js para os gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <header>
+            <h1>Dashboard da Votação - PEC da Blindagem</h1>
+        </header>
+
+        <section class="intro-text">
+            <p>
+                A <a href="https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2352476" target="_blank" rel="noopener noreferrer">Proposta de Emenda à Constituição (PEC) 9/2023</a>, de autoria do Deputado Delegado Marcelo Freitas (União/MG), é popularmente conhecida como 'PEC da Blindagem'. Ela propõe mudanças nas regras de inelegibilidade e na imunidade parlamentar, gerando amplo debate no Congresso Nacional.
+                
+                <br>
+                Este dashboard interativo apresenta como cada deputado votou na proposta.
+                <br>
+                Fonte dos dados: <a href="https://web.archive.org/web/20250920223427/https://oglobo.globo.com/politica/noticia/2025/09/17/quem-votou-a-favor-da-pec-da-blindagem-veja-lista-completa-por-deputado-e-partido.ghtml" target="_blank" rel="noopener noreferrer">O Globo</a>.
+            </p>
+        </section>
+
+        <section class="filters">
+             <div class="filter-group">
+                <label>Selecionar Turno:</label>
+                <div class="radio-group">
+                    <input type="radio" id="radio-turno1" name="turno" value="1" checked>
+                    <label for="radio-turno1">1º Turno</label>
+                    <input type="radio" id="radio-turno2" name="turno" value="2">
+                    <label for="radio-turno2">2º Turno</label>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label for="search-nome">Buscar por Nome:</label>
+                <input type="text" id="search-nome" placeholder="Digite o nome do deputado...">
+            </div>
+            <div class="filter-group">
+                <label for="filter-partido">Filtrar por Partido:</label>
+                <select id="filter-partido"></select>
+            </div>
+            <div class="filter-group">
+                <label for="filter-uf">Filtrar por UF:</label>
+                <select id="filter-uf"></select>
+            </div>
+            <div class="filter-group">
+                <label for="filter-voto" id="label-filter-voto">Filtrar por Voto (1º Turno):</label>
+                <select id="filter-voto"></select>
+            </div>
+            <button id="clear-filters">Limpar Filtros</button>
+        </section>
+
+        <section class="charts">
+            <div class="chart-card">
+                <h2 id="chart-turno-title">Votos no 1º Turno</h2>
+                <canvas id="chart-turno1"></canvas>
+            </div>
+            <div class="chart-card">
+                <h2 id="chart-partidos-title">Votos por Partido (1º Turno)</h2>
+                <canvas id="chart-partidos"></canvas>
+            </div>
+        </section>
+
+        <section class="data-table">
+            <div class="table-header">
+                <h2>Dados dos Deputados (<span id="deputy-count">0</span>)</h2>
+                <div class="legend">
+                    <span class="legend-color"></span> Mudou o voto entre os turnos
+                </div>
+            </div>
+            <table id="deputies-table"></table>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+
+    <footer>
+        <p>Desenvolvido por Silvair Leite Soares | <a href="https://www.linkedin.com/in/silvairleitesoares/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+    </footer>
+</body>
+</html>
