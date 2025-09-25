@@ -550,6 +550,27 @@ Zucco;PL;RS;Sim;Sim`;
     const chartTurnoTitle = document.getElementById('chart-turno-title');
     const chartPartidosTitle = document.getElementById('chart-partidos-title');
 
+    // Elementos e lógica para o seletor de tema
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Verifica o tema salvo no localStorage
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    body.className = savedTheme + '-theme';
+    themeToggleBtn.textContent = savedTheme === 'dark' ? 'Tema Claro' : 'Tema Escuro';
+
+    themeToggleBtn.addEventListener('click', () => {
+        if (body.classList.contains('dark-theme')) {
+            body.classList.replace('dark-theme', 'light-theme');
+            themeToggleBtn.textContent = 'Tema Escuro';
+            localStorage.setItem('theme', 'light');
+        } else {
+            body.classList.replace('light-theme', 'dark-theme');
+            themeToggleBtn.textContent = 'Tema Claro';
+            localStorage.setItem('theme', 'dark');
+        }
+        filterAndRender(); // Re-renderiza os gráficos com a nova cor da legenda
+    });
     // Função para popular os filtros
     const populateFilters = () => {
         const partidos = [...new Set(allDeputies.map(d => d.partido))].sort();
@@ -628,6 +649,9 @@ Zucco;PL;RS;Sim;Sim`;
         const votoKey = turnoSelecionado === '1' ? 'voto1' : 'voto2';
         const turnoLabel = `${turnoSelecionado}º Turno`;
 
+        // Define a cor do texto dos gráficos com base no tema atual
+        const chartTextColor = document.body.classList.contains('dark-theme') ? '#f4f7f9' : '#333';
+
         // Dados para o gráfico de votos no 1º turno
         const votosTurno1 = deputies.reduce((acc, dep) => {
             acc[dep[votoKey]] = (acc[dep[votoKey]] || 0) + 1;
@@ -662,7 +686,15 @@ Zucco;PL;RS;Sim;Sim`;
                     backgroundColor: ['#ffc107', '#6c757d', '#dc3545', '#28a745', '#17a2b8'], // Abstenção, Ausente, Não, Sim, Art. 17
                 }]
             },
-            options: { responsive: true, maintainAspectRatio: false }
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: chartTextColor }
+                    }
+                }
+            }
         });
 
         // Renderizar gráfico de barras para votos por partido
@@ -681,7 +713,15 @@ Zucco;PL;RS;Sim;Sim`;
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } }
+                plugins: {
+                    legend: {
+                        labels: { color: chartTextColor }
+                    }
+                },
+                scales: {
+                    x: { stacked: true, ticks: { color: chartTextColor } },
+                    y: { stacked: true, beginAtZero: true, ticks: { color: chartTextColor } }
+                }
             }
         });
     };

@@ -1,10 +1,46 @@
+/* Definição de variáveis de cor para os temas */
+:root {
+    /* Tema Claro (Light) */
+    --bg-color-light: #f4f7f9;
+    --text-color-light: #333;
+    --card-bg-color-light: #fff;
+    --header-color-light: #1a253c;
+    --link-color-light: #007bff;
+    --border-color-light: #ddd;
+    --table-header-bg-light: #e9ecef;
+    --table-row-even-bg-light: #f8f9fa;
+    --changed-vote-bg-light: #fffbe6;
+    --changed-vote-border-light: #ffe58f;
+    --input-bg-light: #fff;
+    --input-text-light: #333;
+    --input-border-light: #ccc;
+    --button-clear-bg-light: #d9534f;
+    --button-clear-hover-bg-light: #c9302c;
+
+    /* Tema Escuro (Dark) */
+    --bg-color-dark: #212529; /* Cinza bem escuro, quase preto */
+    --text-color-dark: #f4f7f9;
+    --card-bg-color-dark: #343a40; /* Cinza escuro para os cards */
+    --header-color-dark: #ffffff;
+    --link-color-dark: #4a90e2;
+    --border-color-dark: #495057;
+    --table-header-bg-dark: #495057;
+    --table-row-even-bg-dark: #2c3034;
+    --changed-vote-bg-dark: #5e5b3e;
+    --changed-vote-border-dark: #8c875d;
+    --input-bg-dark: #495057;
+    --input-text-dark: #f4f7f9;
+    --input-border-dark: #6c757d;
+    --button-clear-bg-dark: #c9302c;
+    --button-clear-hover-bg-dark: #a52824;
+}
+
 /* Estilos gerais */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f4f7f9;
-    color: #333;
     margin: 0;
     padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .dashboard-container {
@@ -14,15 +50,29 @@ body {
     gap: 20px;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
 header h1 {
-    color: #1a253c;
     text-align: center;
     margin-bottom: 10px;
+    flex-grow: 1;
+}
+
+header button#theme-toggle {
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
 }
 
 /* Seção de Introdução */
 .intro-text {
-    background-color: #fff;
     padding: 15px 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -36,7 +86,6 @@ header h1 {
 }
 
 .intro-text a {
-    color: #007bff;
     text-decoration: none;
     font-weight: 600;
 }
@@ -51,7 +100,6 @@ header h1 {
     flex-wrap: wrap;
     gap: 15px;
     align-items: center;
-    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -75,31 +123,23 @@ header h1 {
 .filter-group label {
     font-size: 0.9em;
     margin-bottom: 5px;
-    color: #555;
 }
 
 .filters select, .filters input[type="text"] {
     padding: 8px 12px;
-    border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #fff;
     font-size: 1em;
     min-width: 180px;
 }
 
 .filters button {
     padding: 8px 20px;
-    border: none;
-    background-color: #d9534f;
+    border: 1px solid transparent;
     color: white;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s;
     align-self: flex-end; /* Alinha o botão com a base dos selects */
-}
-
-.filters button:hover {
-    background-color: #c9302c;
 }
 
 /* Seção de Gráficos */
@@ -110,23 +150,22 @@ header h1 {
 }
 
 .chart-card {
-    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     height: 450px; /* Define uma altura fixa para os cards dos gráficos */
+    min-height: 450px; /* Define uma altura mínima para os cards, permitindo que cresçam se necessário */
+    height: 500px; /* Altura suficiente para acomodar o gráfico e a legenda */
 }
 
 .chart-card h2 {
     margin-top: 0;
     text-align: center;
     font-size: 1.2em;
-    color: #1a253c;
 }
 
 /* Tabela de Dados */
 .data-table {
-    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -152,8 +191,6 @@ header h1 {
     display: inline-block;
     width: 15px;
     height: 15px;
-    background-color: #fffbe6; /* Cor do destaque */
-    border: 1px solid #ffe58f;
     border-radius: 3px;
 }
 
@@ -164,22 +201,11 @@ table {
 
 table th, table td {
     padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
     text-align: left;
 }
 
 table th {
-    background-color: #e9ecef;
     font-weight: 600;
-}
-
-table tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
-}
-
-/* Estilo para a linha com voto alterado */
-table tbody tr.changed-vote {
-    background-color: #fffbe6; /* Amarelo claro para destaque */
 }
 
 /* Estilos do Rodapé */
@@ -188,15 +214,91 @@ footer {
     padding: 20px;
     margin-top: 20px;
     font-size: 0.9em;
-    color: #6c757d;
 }
 
 footer a {
-    color: #007bff;
     text-decoration: none;
     font-weight: 600;
 }
 
 footer a:hover {
     text-decoration: underline;
+}
+
+/* Aplicação das variáveis do tema claro */
+.light-theme {
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+}
+.light-theme header h1 { color: var(--header-color-light); }
+.light-theme .intro-text,
+.light-theme .filters,
+.light-theme .chart-card,
+.light-theme .data-table { background-color: var(--card-bg-color-light); }
+.light-theme .intro-text a,
+.light-theme footer a { color: var(--link-color-light); }
+.light-theme .filters select, .light-theme .filters input[type="text"] {
+    background-color: var(--input-bg-light);
+    color: var(--input-text-light);
+    border: 1px solid var(--input-border-light);
+}
+.light-theme .filters button#clear-filters {
+    background-color: var(--button-clear-bg-light);
+}
+.light-theme .filters button#clear-filters:hover {
+    background-color: var(--button-clear-hover-bg-light);
+}
+.light-theme .chart-card h2 { color: var(--header-color-light); }
+.light-theme .legend .legend-color {
+    background-color: var(--changed-vote-bg-light);
+    border: 1px solid var(--changed-vote-border-light);
+}
+.light-theme table th, .light-theme table td { border-bottom: 1px solid var(--border-color-light); }
+.light-theme table th { background-color: var(--table-header-bg-light); }
+.light-theme table tbody tr:nth-child(even) { background-color: var(--table-row-even-bg-light); }
+.light-theme table tbody tr.changed-vote { background-color: var(--changed-vote-bg-light); }
+.light-theme footer { color: var(--text-color-light); }
+.light-theme header button#theme-toggle {
+    background-color: var(--header-color-light);
+    color: var(--bg-color-light);
+    border: 1px solid var(--header-color-light);
+}
+
+/* Aplicação das variáveis do tema escuro */
+.dark-theme {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+}
+.dark-theme header h1 { color: var(--header-color-dark); }
+.dark-theme .intro-text,
+.dark-theme .filters,
+.dark-theme .chart-card,
+.dark-theme .data-table { background-color: var(--card-bg-color-dark); }
+.dark-theme .intro-text a,
+.dark-theme footer a { color: var(--link-color-dark); }
+.dark-theme .filters select, .dark-theme .filters input[type="text"] {
+    background-color: var(--input-bg-dark);
+    color: var(--input-text-dark);
+    border: 1px solid var(--input-border-dark);
+}
+.dark-theme .filters button#clear-filters {
+    background-color: var(--button-clear-bg-dark);
+}
+.dark-theme .filters button#clear-filters:hover {
+    background-color: var(--button-clear-hover-bg-dark);
+}
+.dark-theme .chart-card h2 { color: var(--header-color-dark); }
+.dark-theme .legend .legend-color {
+    background-color: var(--changed-vote-bg-dark);
+    border: 1px solid var(--changed-vote-border-dark);
+}
+.dark-theme table th, .dark-theme table td { border-bottom: 1px solid var(--border-color-dark); }
+.dark-theme table th { background-color: var(--table-header-bg-dark); }
+.dark-theme table tbody tr:nth-child(even) { background-color: var(--table-row-even-bg-dark); }
+.dark-theme table tbody tr.changed-vote { background-color: var(--changed-vote-bg-dark); }
+.dark-theme footer { color: var(--text-color-dark); }
+.dark-theme header button#theme-toggle {
+    background-color: var(--text-color-dark);
+    color: var(--bg-color-dark);
+    border: 1px solid var(--text-color-dark);
 }
