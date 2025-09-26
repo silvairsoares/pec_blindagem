@@ -1,6 +1,6 @@
 **Dashboard da Votação - PEC da Blindagem**
 
-A [Proposta de Emenda à Constituição n° 3, de 2021](https://www25.senado.leg.br/web/atividade/materias/-/materia/170519"), de autoria de **Celso Sabino - PSDB/PA** e outros, é popularmente conhecida como 'PEC da Blindagem'.
+A [Proposta de Emenda à Constituição n° 3, de 2021](https://www25.senado.leg.br/web/atividade/materias/-/materia/170519), de autoria de **Celso Sabino - PSDB/PA** e outros, é popularmente conhecida como 'PEC da Blindagem'.
 
 Ela propõe mudanças nas regras de inelegibilidade e na imunidade parlamentar, gerando amplo debate no Congresso Nacional.
 
